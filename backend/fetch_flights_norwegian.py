@@ -2,8 +2,13 @@ import requests
 import uuid
 from datetime import timedelta
 from database import supabase
+from dotenv import load_dotenv
+import os
 
-API_KEY = "06d26a2b5ab73393271a798ea814c458"
+load_dotenv()
+
+API_KEY = os.getenv("AVIATIONSTACK_API_KEY")
+
 BASE_URL = "http://api.aviationstack.com/v1/flights"
 
 def fetch_norwegian_flights(date):
