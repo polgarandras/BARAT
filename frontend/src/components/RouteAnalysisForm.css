@@ -1,0 +1,194 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@300;400;600&display=swap');
+
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: 'Montserrat', sans-serif;
+    background: url('./background.jpg') no-repeat center center fixed;
+    background-size: cover;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 20px;
+    color: white;
+    text-align: center;
+}
+
+.section-title {
+    font-size: 3.5rem;
+    font-family: 'Anton', sans-serif;
+    margin-bottom: 10px;
+}
+
+.sub-title {
+    font-size: 1.5rem;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    margin-bottom: 40px;
+    color: #f0f0f0;
+}
+
+form {
+    background: rgba(0, 0, 0, 0.7);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    max-width: 600px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+label {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    color: white;
+}
+
+select, input {
+    padding: 10px;
+    margin-top: 5px;
+    width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.submit-button {
+    background-color: #28a745;
+    color: white;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 5px;
+    padding: 15px 30px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.submit-button:hover {
+    background-color: #218838;
+}
+
+.submit-button:disabled {
+    background-color: #6c757d;
+    cursor: not-allowed;
+}
+
+/* Spinner for Loading */
+.spinner {
+    display: inline-block;
+    width: 1rem;
+    height: 1rem;
+    border: 3px solid white;
+    border-radius: 50%;
+    border-top: 3px solid transparent;
+    animation: spin 0.8s linear infinite;
+    margin-right: 8px;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Results Section */
+.results-container {
+    margin-top: 50px;
+    width: 100%;
+    max-width: 1000px;
+}
+
+h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    font-family: 'Montserrat', sans-serif;
+    color: #ffffff;
+}
+
+/* Card Enhancements */
+.cards {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 30px;
+    margin-top: 20px;
+}
+
+.card {
+    background: linear-gradient(145deg, #ffffff, #f0f0f0);
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    flex: 1;
+    min-width: 280px;
+    max-width: 350px;
+    text-align: center;
+    color: #333;
+    border: 2px solid transparent;
+    transition: transform 0.3s ease, border 0.3s ease;
+    animation: fadeInUp 0.6s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    border: 2px solid #28a745;
+}
+
+/* AI Summary Card Enhancements */
+.summary-card {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    margin-top: 40px;
+    text-align: center;
+    max-width: 700px;
+    width: 100%;
+    color: #333;
+}
+
+.summary-card h3 {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+}
+
+/* AI Response Readability */
+.summary-card p {
+    font-size: 1.1rem;  /* Decreased from 1.2rem */
+    line-height: 1.7;   /* Slightly tighter line spacing */
+    margin: 12px 0;     /* Adjust vertical spacing */
+    text-align: left;
+    white-space: pre-wrap;
+}
+
+.summary-card ul {
+    list-style-type: disc;
+    margin: 10px 0 10px 20px;
+}
+
+.summary-card li {
+    margin-bottom: 8px;
+    line-height: 1.6;
+}
+
+.summary-card strong {
+    font-weight: 700;
+    color: #333;
+    font-size: 1.2rem;  /* Reduced title size slightly */
+    display: block;
+    margin-top: 12px;
+}
