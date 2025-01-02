@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "./RouteAnalysisForm.css";
 
+const API_BASE_URL = process.env.REACT_APP_BACKEND_URL;
+
 const RouteAnalysisForm = () => {
     const [departureAirport, setDepartureAirport] = useState("");
     const [arrivalAirport, setArrivalAirport] = useState("");
@@ -16,7 +18,7 @@ const RouteAnalysisForm = () => {
     useEffect(() => {
         const fetchRoutes = async () => {
             try {
-                const response = await fetch("http://127.0.0.1:8000/available-routes");
+                const response = await fetch(`${API_BASE_URL}/available-routes`);
                 const data = await response.json();
 
                 if (data.departure_airports && data.arrival_airports) {
@@ -37,7 +39,7 @@ const RouteAnalysisForm = () => {
         setLoading(true);
         try {
             const response = await fetch(
-                `http://127.0.0.1:8000/route-analysis?departure_airport=${departureAirport}&arrival_airport=${arrivalAirport}&start_date=${startDate}&end_date=${endDate}`
+                `${API_BASE_URL}/route-analysis?departure_airport=${departureAirport}&arrival_airport=${arrivalAirport}&start_date=${startDate}&end_date=${endDate}`
             );
             const data = await response.json();
             setAnalysisResult(data);
@@ -57,21 +59,13 @@ const RouteAnalysisForm = () => {
 
     // Prettify AI Summary and Bold Titles
     const prettifySummary = (summary) => {
-        // Replace markdown bold with HTML <strong> tags
         let formattedSummary = summary.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-    
-        // Fix line breaks after numbers (e.g., 1.\n -> 1. )
         formattedSummary = formattedSummary.replace(/(\d+)\.\s*\n/g, '<hr><br><strong>$1.</strong> ');
-    
-        // Fix line breaks after section titles (like "Total Flights:")
         formattedSummary = formattedSummary.replace(/:\s*\n/g, ': <br>');
-    
-        // Preserve bullet points properly
-        formattedSummary = formattedSummary.replace(/-\s/g, '• ');  // Replace "-" with "•"
-    
-        // Split by line and render paragraphs
+        formattedSummary = formattedSummary.replace(/-\s/g, '• ');
+
         const lines = formattedSummary.split('\n');
-    
+
         return (
             <div>
                 {lines.map((line, index) => (
@@ -82,7 +76,6 @@ const RouteAnalysisForm = () => {
             </div>
         );
     };
-    
 
     return (
         <div className="container">
@@ -160,16 +153,10 @@ const RouteAnalysisForm = () => {
                                 <h4>Route Coverage</h4>
                                 {renderRouteCoverage(analysisResult.current_period.route_coverage)}
                             </div>
-
                             <div className="card">
                                 <h3>Previous Period</h3>
-                                <p>Total Flights: {analysisResult.previous_period.total_flights}</p>
-                                <p>Average Departure Delay: {analysisResult.previous_period.average_departure_delay} minutes</p>
-                                <p>Average Arrival Delay: {analysisResult.previous_period.average_arrival_delay} minutes</p>
-                                <h4>Route Coverage</h4>
                                 {renderRouteCoverage(analysisResult.previous_period.route_coverage)}
                             </div>
-
                             <div className="summary-card">
                                 <h3>Detailed Analysis</h3>
                                 {prettifySummary(summary)}
