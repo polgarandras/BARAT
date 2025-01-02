@@ -21,7 +21,7 @@ openai_client = OpenAI(api_key=OPENAI_API_KEY)
 # CORS Configuration
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=["https://barat-olive.vercel.app"],  # Remove the trailing slash
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

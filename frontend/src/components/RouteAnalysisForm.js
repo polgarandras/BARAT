@@ -14,16 +14,19 @@ const RouteAnalysisForm = () => {
     const [summary, setSummary] = useState("");
     const [loading, setLoading] = useState(false);
 
-    // Fetch available airports
     useEffect(() => {
         const fetchRoutes = async () => {
             try {
+                // Make the API call to the backend
                 const response = await fetch(`${API_BASE_URL}/available-routes`);
-                const data = await response.json();
-
+                const data = await response.json();  // Parse the response as JSON
+    
+                console.log('Fetched data:', data);  // Log the entire response data
+    
+                // Ensure the response data is in the expected format
                 if (data.departure_airports && data.arrival_airports) {
-                    setRoutes(data.departure_airports);
-                    setArrivalAirports(data.arrival_airports);
+                    setRoutes(data.departure_airports);  // Set departure airports
+                    setArrivalAirports(data.arrival_airports);  // Set arrival airports
                 } else {
                     console.error("Unexpected data format", data);
                 }
@@ -33,7 +36,7 @@ const RouteAnalysisForm = () => {
         };
         fetchRoutes();
     }, []);
-
+    
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
