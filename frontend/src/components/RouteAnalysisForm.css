@@ -64,6 +64,18 @@ select, input {
     font-size: 1rem;
 }
 
+/* Date input fields - slightly wider and aligned to the left on mobile */
+input[type="date"] {
+    width: calc(100% - 20px);  /* Make the date inputs slightly wider */
+}
+
+@media (max-width: 768px) {
+    input[type="date"] {
+        text-align: left;           /* Align to the left on smaller screens */
+    }
+}
+
+/* Submit Button */
 .submit-button {
     background-color: #28a745;
     color: white;
@@ -205,12 +217,13 @@ h2 {
 
     .cards {
         flex-direction: column;
-        align-items: stretch;
+        align-items: center;
+        gap: 20px;
     }
 
     .card {
-        width: 100%;
-        margin-bottom: 15px;
+        width: 90%;   /* Cards will be smaller on mobile (no 100% width) */
+        margin-bottom: 20px;
     }
 
     .summary-card {
