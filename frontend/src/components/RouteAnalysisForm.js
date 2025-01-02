@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "./RouteAnalysisForm.css";
 
-const API_BASE_URL = process.env.REACT_APP_BACKEND_URL;
+// Use the environment variable directly
+const REACT_APP_BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
 const RouteAnalysisForm = () => {
     const [departureAirport, setDepartureAirport] = useState("");
@@ -14,35 +15,28 @@ const RouteAnalysisForm = () => {
     const [summary, setSummary] = useState("");
     const [loading, setLoading] = useState(false);
 
+    // Fetch available airports
     useEffect(() => {
         const fetchRoutes = async () => {
             try {
-                // Make the API call to the backend
-                const response = await fetch(`${API_BASE_URL}/available-routes`);
-                const data = await response.json();  // Parse the response as JSON
-    
-                console.log('Fetched data:', data);  // Log the entire response data
-    
-                // Ensure the response data is in the expected format
-                if (data.departure_airports && data.arrival_airports) {
-                    setRoutes(data.departure_airports);  // Set departure airports
-                    setArrivalAirports(data.arrival_airports);  // Set arrival airports
-                } else {
-                    console.error("Unexpected data format", data);
-                }
+                const response = await fetch(`${REACT_APP_BACKEND_URL}/available-routes`);
+                const data = await response.json();
+                console.log('Fetched data:', data);  // Log the response to check it
+                setRoutes(data.departure_airports);  // Populate the dropdown with the data
+                setArrivalAirports(data.arrival_airports);
             } catch (error) {
                 console.error("Failed to fetch routes:", error);
             }
         };
         fetchRoutes();
     }, []);
-    
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
         try {
             const response = await fetch(
-                `${API_BASE_URL}/route-analysis?departure_airport=${departureAirport}&arrival_airport=${arrivalAirport}&start_date=${startDate}&end_date=${endDate}`
+                `${REACT_APP_BACKEND_URL}/route-analysis?departure_airport=${departureAirport}&arrival_airport=${arrivalAirport}&start_date=${startDate}&end_date=${endDate}`
             );
             const data = await response.json();
             setAnalysisResult(data);
