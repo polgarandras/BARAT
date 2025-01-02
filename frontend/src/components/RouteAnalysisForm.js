@@ -152,6 +152,10 @@ const RouteAnalysisForm = () => {
                             </div>
                             <div className="card">
                                 <h3>Previous Period</h3>
+                                <p>Total Flights: {analysisResult.previous_period ? analysisResult.previous_period.total_flights : 'N/A'}</p>
+                                <p>Average Departure Delay: {analysisResult.previous_period ? analysisResult.previous_period.average_departure_delay : 'N/A'} minutes</p>
+                                <p>Average Arrival Delay: {analysisResult.previous_period ? analysisResult.previous_period.average_arrival_delay : 'N/A'} minutes</p>
+                                <h4>Route Coverage</h4>
                                 {renderRouteCoverage(analysisResult.previous_period.route_coverage)}
                             </div>
                             <div className="summary-card">
